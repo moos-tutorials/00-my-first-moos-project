@@ -1,0 +1,25 @@
+sudo: required
+dist: trusty
+
+language: cpp
+
+addons:
+  apt:
+    packages:
+    - git
+    - subversion
+    - build-essential
+    - cmake
+    - libfltk1.3-dev
+    - libtiff5-dev
+    - tree
+
+script:
+ - svn co https://oceanai.mit.edu/svn/moos-ivp-aro/trunk/ moos-ivp
+ - cd moos-ivp
+ - ./build.sh
+ - sudo ./build-moos.sh install
+ - sudo ./build-ivp.sh install
+
+after_script:
+ - tree -d -I build -L 3
